@@ -116,7 +116,7 @@ class Wallet:
                 "proof": None,
                 "public": None
             }
-        SNARKJS = r"C:\Users\18Shr\AppData\Roaming\npm\snarkjs.cmd"
+        SNARKJS = "snarkjs"
         try:
             # Generate witness
             subprocess.run([

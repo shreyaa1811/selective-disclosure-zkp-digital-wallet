@@ -1,4 +1,4 @@
-# ZKP Compliance Wallet
+# 🔐 ZKP Compliance Wallet
 
 A privacy-preserving digital wallet using real **Groth16 zk-SNARKs** (circom + snarkjs) for selective disclosure of identity and financial properties, with optional audit mode.
 

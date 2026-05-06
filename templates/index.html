@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZKP Compliance Wallet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+
+  <header>
+    <div class="logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">ZK<strong>WALLET</strong></span>
+    </div>
+    <div class="status-pill" id="statusPill">
+      <span class="dot"></span> OFFLINE
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── LEFT PANEL: Controls ── -->
+    <aside class="panel left-panel">
+
+      <!-- Step 1: Setup -->
+      <section class="card" id="setupCard">
+        <div class="card-header">
+          <span class="step-num">01</span>
+          <h2>Identity Setup</h2>
+        </div>
+        <p class="card-desc">KYC authority issues a cryptographic credential. Your PII is verified offline — only a Poseidon commitment is registered.</p>
+
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" id="dob" value="1998-05-15" />
+        </div>
+        <div class="form-group">
+          <label>Initial Balance ($)</label>
+          <input type="number" id="balance" value="5000" min="0" />
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <input type="text" id="country" value="UAE" />
+        </div>
+        <div class="form-group">
+          <label>Allowed Merchants (comma-separated)</label>
+          <input type="text" id="merchants" value="amazon,noon,careem,hospital_xyz" />
+        </div>
+
+        <button class="btn btn-primary" onclick="setup()">
+          <span>Issue KYC Credential</span>
+          <svg viewBox="0 0 20 20"><path d="M10 2L18 10L10 18M2 10H18"/></svg>
+        </button>
+      </section>
+
+      <!-- Step 2: Pay -->
+      <section class="card" id="payCard" data-locked="true">
+        <div class="card-header">
+          <span class="step-num">02</span>
+          <h2>Make Payment</h2>
+        </div>
+        <p class="card-desc">Wallet generates real Groth16 ZK proofs. Only proof outputs reach the merchant — never your balance or DOB.</p>
+
+        <div class="form-group">
+          <label>Merchant ID</label>
+          <input type="text" id="merchantId" value="amazon" />
+        </div>
+        <div class="form-group">
+          <label>Amount ($)</label>
+          <input type="number" id="amount" value="150" min="0" step="0.01" />
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="pay()">
+            <span>Pay with ZK Proofs</span>
+            <svg viewBox="0 0 20 20"><path d="M10 2L18 10L10 18M2 10H18"/></svg>
+          </button>
+          <button class="btn btn-ghost" onclick="tryBlockedMerchant()">Try Blocked Merchant</button>
+        </div>
+      </section>
+
+      <!-- Step 3: Audit -->
+      <section class="card" id="auditCard" data-locked="true">
+        <div class="card-header">
+          <span class="step-num">03</span>
+          <h2>Audit Mode</h2>
+        </div>
+        <p class="card-desc">Regulator requests aggregate compliance data. No per-transaction identity or exact history disclosed.</p>
+
+        <button class="btn btn-accent" onclick="requestAudit()">
+          <span>Request Audit Report</span>
+          <svg viewBox="0 0 20 20"><path d="M10 2L18 10L10 18M2 10H18"/></svg>
+        </button>
+
+        <button class="btn btn-ghost" style="margin-top:10px" onclick="resetWallet()">Reset Wallet</button>
+      </section>
+
+    </aside>
+
+    <!-- ── RIGHT PANEL: Output ── -->
+    <section class="panel right-panel">
+
+      <div class="output-header">
+        <h3 id="outputTitle">Awaiting operation...</h3>
+        <div class="tab-bar">
+          <button class="tab active" onclick="switchTab('visual')">Visual</button>
+          <button class="tab" onclick="switchTab('json')">Raw JSON</button>
+        </div>
+      </div>
+
+      <!-- Visual output -->
+      <div id="visualOutput" class="output-area">
+        <div class="empty-state">
+          <div class="empty-icon">⬡</div>
+          <p>Run a wallet operation to see ZK proof output here.</p>
+          <p class="hint">Start with <strong>Identity Setup →</strong></p>
+        </div>
+      </div>
+
+      <!-- JSON output -->
+      <div id="jsonOutput" class="output-area hidden">
+        <pre id="rawJson" class="json-pre">// No data yet</pre>
+      </div>
+
+      <!-- Proof chain visualization -->
+      <div id="proofChain" class="proof-chain hidden">
+        <h4>ZK Proof Pipeline</h4>
+        <div class="chain-steps" id="chainSteps"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Toast notifications -->
+  <div id="toastContainer"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

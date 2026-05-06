@@ -1,0 +1,25 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Node
+node_modules/
+
+# ZK keys — too large for GitHub (pot14_final.ptau is 18MB)
+keys/pot14_0000.ptau
+keys/pot14_0001.ptau
+keys/pot14_final.ptau
+keys/agecheck_0000.zkey
+keys/balancecheck_0000.zkey
+keys/kyccheck_0000.zkey
+
+# Runtime generated
+proofs/
+*.wtns
+tmp*.js
+
+# VS Code
+.vscode/

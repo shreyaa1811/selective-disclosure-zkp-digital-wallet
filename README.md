@@ -11,7 +11,7 @@ A privacy-preserving digital wallet using real **Groth16 zk-SNARKs** (circom + s
 - Proves **balance ≥ amount** without revealing actual balance
 - Enforces **merchant allowlist** locally
 - Generates **aggregate-only audit reports** signed with Ed25519
-- All three ZK proofs are real Groth16 proofs over BN254 — not simulated
+- All three ZK proofs are real Groth16 proofs over BN254
 
 ---
 

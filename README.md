@@ -148,7 +148,23 @@ Should print the file path without error.
 
 ---
 
-### Step 5 — Compile the circuits (WSL)
+### Step 5 - Update src/wallet.py with specific details
+
+Open `src/wallet.py` and find `SNARKJS` at the top of `_run_snarkjs_proof`. 
+By default it is set to `"snarkjs"` which works if snarkjs is in your PATH.
+
+If you get a `FileNotFoundError` for snarkjs, replace it with your full path:
+
+1. Run in PowerShell:
+```powershell
+   npm config get prefix
+```
+2. Take that output (e.g. `C:\Users\YourName\AppData\Roaming\npm`) and update wallet.py:
+```python
+   SNARKJS = r"C:\Users\YourName\AppData\Roaming\npm\snarkjs.cmd"
+```
+
+### Step 6 — Compile the circuits (WSL)
 
 Still in WSL, inside the project folder:
 
@@ -187,7 +203,7 @@ You should see: `AgeCheck_js/`, `BalanceCheck_js/`, `KYCCheck_js/`, `agecheck_fi
 
 ---
 
-### Step 6 — Install Python dependencies (PowerShell)
+### Step 7 — Install Python dependencies (PowerShell)
 
 Switch to a **PowerShell terminal** now. Navigate to your project folder:
 
@@ -203,7 +219,7 @@ python -c "import flask, cryptography; print('OK')"
 
 ---
 
-### Step 7 — Install snarkjs on Windows (PowerShell)
+### Step 8 — Install snarkjs on Windows (PowerShell)
 
 The Flask app runs on Windows and calls snarkjs as a subprocess. snarkjs must also be installed on Windows:
 
@@ -226,7 +242,7 @@ Update the path to match what `npm config get prefix` returned, adding `\snarkjs
 
 ---
 
-### Step 8 — Install circomlibjs (PowerShell)
+### Step 9 — Install circomlibjs (PowerShell)
 
 The Flask app uses circomlibjs to compute Poseidon hashes that match the circuit:
 

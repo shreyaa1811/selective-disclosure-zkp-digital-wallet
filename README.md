@@ -274,6 +274,12 @@ Click "Request Audit Report". You get transaction count, total spent, max single
 
 ---
 
+## Demo Output Screenshots 
+
+![App Screenshot 1](./demo/1.png)
+![App Screenshot 2](./demo/2.png)
+![App Screenshot 3](./demo/3.png)
+
 ## Verifying Everything Works
 
 Run these tests in order to confirm all security properties:

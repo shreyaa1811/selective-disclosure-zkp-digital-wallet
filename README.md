@@ -21,7 +21,7 @@ A privacy-preserving digital wallet using real **Groth16 zk-SNARKs** (circom + s
 |---|---|
 | ZK Circuits | circom 2.2.3 |
 | ZK Proof Generation | snarkjs 0.7.6 |
-| ZK-friendly Hash | circomlibjs (Poseidon) |
+| ZK-friendly Hash | circomlibjs |
 | Circuit Primitives | circomlib |
 | Backend | Python 3.11+ / Flask |
 | Signing | Ed25519 via Python cryptography library |
@@ -58,8 +58,6 @@ This project uses **two environments** and you need to know which is which:
 |---|---|---|
 | WSL terminal | Compiling circuits (setup.sh) | In VS Code: terminal dropdown → select Ubuntu/WSL |
 | Windows PowerShell | Running Flask app | Normal VS Code terminal |
-
-**Never run setup.sh in PowerShell. Never run python app.py in WSL.**
 
 ---
 
